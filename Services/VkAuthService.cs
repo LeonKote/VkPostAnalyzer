@@ -46,12 +46,12 @@ namespace VkPostAnalyzer.Services
 			if (authRequest == null)
 				return Result<string>.Failure("Invalid state parameter.");
 
+			dbContext.AuthRequests.Remove(authRequest);
+			await dbContext.SaveChangesAsync();
+
 			var accessToken = await vkApiClient.GetAccessToken(code, deviceId, authRequest.CodeVerifier);
 			if (accessToken == null)
 				return Result<string>.Failure("Error getting access token.");
-
-			dbContext.AuthRequests.Remove(authRequest);
-			await dbContext.SaveChangesAsync();
 
 			return Result<string>.Success(accessToken);
 		}

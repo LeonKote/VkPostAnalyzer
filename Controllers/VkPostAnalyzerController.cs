@@ -16,9 +16,10 @@ namespace VkPostAnalyzer.Controllers
 		}
 
 		/// <summary>
-		/// Анализирует последние 5 постов указанного пользователя VK и подсчитывает частоту букв.
+		/// Анализирует последние 5 постов указанного пользователя VK, подсчитывает частоту букв 
+		/// и сохраняет результат в базу данных.
 		/// </summary>
-		/// <param name="analyzeRequest">Запрос, содержащий токен доступа VK и идентификатор владельца постов (ownerId необязателен).</param>
+		/// <param name="analyzeRequest">Запрос, содержащий токен доступа VK и опционально идентификатор владельца постов.</param>
 		/// <returns>Список с результатами анализа (количество вхождений каждой буквы).</returns>
 		[HttpPost("analyze")]
 		public async Task<IActionResult> AnalyzePosts([FromBody] AnalyzeRequest analyzeRequest)

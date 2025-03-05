@@ -28,19 +28,14 @@ namespace VkPostAnalyzer.Services
 			var posts = response.Items.Select(x => x.Text);
 			var text = string.Join(' ', posts);
 
-			logger.LogInformation("Начало анализа постов: {Time}", DateTime.UtcNow);
+			logger.LogInformation("Посты получены, начинается анализ...");
 			var letterCounts = text.ToLower()
 				.Where(char.IsLetter)
 				.GroupBy(c => c)
-				.ToDictionary(g => g.Key, g => g.Count());
+				.OrderBy(g => GetAlphabeticalOrder(g.Key));
 
-			logger.LogInformation("Анализ завершен: {Time}", DateTime.UtcNow);
-
-			// Dictionary не гарантирует порядок элементов, поэтому сортируем отдельно
-			var entities = letterCounts
-				.OrderBy(g => GetAlphabeticalOrder(g.Key))
-				.Select(g => new LetterCount(g.Key, g.Value))
-				.ToList();
+			var entities = letterCounts.Select(g => new LetterCount(g.Key, g.Count())).ToList();
+			logger.LogInformation("Анализ завершен, сохранение данных в БД...");
 
 			await dbContext.LetterCounts.AddRangeAsync(entities);
 			await dbContext.SaveChangesAsync();

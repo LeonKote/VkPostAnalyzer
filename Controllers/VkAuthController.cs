@@ -33,7 +33,7 @@ namespace VkPostAnalyzer.Controllers
 		/// <param name="code">Код авторизации.</param>
 		/// <param name="deviceId">ID устройства.</param>
 		/// <param name="state">Состояние для валидации запроса.</param>
-		/// <returns>Результат авторизации.</returns>
+		/// <returns>Токен доступа VK.</returns>
 		[HttpGet("response")]
 		public async Task<IActionResult> HandleAuthResponse([FromQuery] string code, [FromQuery(Name = "device_id")] string deviceId, [FromQuery] string state)
 		{
