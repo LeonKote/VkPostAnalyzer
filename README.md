@@ -35,18 +35,13 @@ cd VkPostAnalyzer
 
 ```json
 {
-  "Vk": {
-    "ClientId": "your_client_id",
-    "RedirectUri": "your_redirect_uri",
-    "Version": "5.131"
-  },
   "ConnectionStrings": {
     "VkPostAnalyzerDb": "Host=localhost;Port=5432;Database=vkpostanalyzer;Username=your_user;Password=your_password"
   },
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information"
-    }
+  "Vk": {
+    "ClientId": "53190985",
+    "RedirectUri": "https://localhost/api/vk/auth/response",
+    "Version": "5.131"
   }
 }
 ```
