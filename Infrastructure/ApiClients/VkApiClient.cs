@@ -1,6 +1,6 @@
 ﻿using Domain.Interfaces;
 using Domain.Models.Vk;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System.Text;
 using System.Text.Json;
 
@@ -13,12 +13,15 @@ namespace Infrastructure.ApiClients
 		private readonly string redirectUri;
 		private readonly string version;
 
-		public VkApiClient(HttpClient httpClient, IConfiguration configuration)
+		public VkApiClient(HttpClient httpClient, IOptions<VkApiOptions> options)
 		{
 			this.httpClient = httpClient;
-			clientId = configuration["Vk:ClientId"] ?? throw new InvalidOperationException("Vk ClientId is not configured.");
-			redirectUri = configuration["Vk:RedirectUri"] ?? throw new InvalidOperationException("Vk RedirectUri is not configured.");
-			version = configuration["Vk:Version"] ?? throw new InvalidOperationException("Vk Version is not configured.");
+
+			var vkApiOptions = options.Value;
+
+			clientId = vkApiOptions.ClientId ?? throw new InvalidOperationException("Vk ClientId is not configured.");
+			redirectUri = vkApiOptions.RedirectUri ?? throw new InvalidOperationException("Vk RedirectUri is not configured.");
+			version = vkApiOptions.Version ?? throw new InvalidOperationException("Vk Version is not configured.");
 		}
 
 		public string GetAuthUrl(string state, string codeChallenge)

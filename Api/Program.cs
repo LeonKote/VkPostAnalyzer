@@ -14,6 +14,8 @@ builder.Host.UseSerilog((context, services, configuration) =>
 		.ReadFrom.Services(services);
 });
 
+builder.Services.Configure<VkApiOptions>(builder.Configuration.GetSection("Vk"));
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
