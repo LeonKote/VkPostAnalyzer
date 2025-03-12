@@ -1,6 +1,6 @@
 ﻿using Domain.Errors;
 
-namespace Domain.Interfaces
+namespace Domain.Interfaces.Services
 {
 	public interface IVkAuthService
 	{

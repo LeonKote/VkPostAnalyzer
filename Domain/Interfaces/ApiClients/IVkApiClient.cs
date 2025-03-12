@@ -1,6 +1,6 @@
 ﻿using Domain.Models.Vk;
 
-namespace Domain.Interfaces
+namespace Domain.Interfaces.ApiClients
 {
 	public interface IVkApiClient
 	{

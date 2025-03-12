@@ -1,5 +1,7 @@
 ﻿using Domain.Errors;
-using Domain.Interfaces;
+using Domain.Interfaces.ApiClients;
+using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
 using Domain.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;

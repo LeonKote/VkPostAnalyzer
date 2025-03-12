@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.Json;
 using Xunit;
 
-namespace Tests.Unit
+namespace Tests.ApiClients
 {
 	public class VkApiClientTests
 	{

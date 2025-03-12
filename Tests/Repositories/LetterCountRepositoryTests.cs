@@ -1,9 +1,10 @@
 ﻿using Domain.Models;
 using Infrastructure.Data;
+using Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace Tests.Unit
+namespace Tests.Repositories
 {
 	public class LetterCountRepositoryTests : IDisposable
 	{

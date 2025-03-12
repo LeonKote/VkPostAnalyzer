@@ -1,4 +1,4 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Interfaces.ApiClients;
 using Domain.Models.Vk;
 using Microsoft.Extensions.Options;
 using System.Text;

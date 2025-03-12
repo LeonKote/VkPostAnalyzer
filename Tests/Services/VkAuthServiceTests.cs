@@ -1,11 +1,12 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Interfaces.ApiClients;
+using Domain.Interfaces.Repositories;
 using Domain.Models;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Services;
 using Xunit;
 
-namespace Tests.Unit
+namespace Tests.Services
 {
 	public class VkAuthServiceTests
 	{
@@ -49,7 +50,7 @@ namespace Tests.Unit
 			var deviceId = "device_123";
 			var state = "valid_state";
 			var expectedToken = "access_token";
-			var authRequest = new AuthRequest(state, "verifier_code", System.DateTime.UtcNow);
+			var authRequest = new AuthRequest(state, "verifier_code", DateTime.UtcNow);
 
 			authRequestRepositoryMock.Setup(repo => repo.GetByStateAsync(state))
 				.ReturnsAsync(authRequest);

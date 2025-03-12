@@ -1,6 +1,9 @@
-using Domain.Interfaces;
+using Domain.Interfaces.ApiClients;
+using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
 using Infrastructure.ApiClients;
 using Infrastructure.Data;
+using Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Services;

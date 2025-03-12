@@ -1,8 +1,8 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Interfaces.Repositories;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Data
+namespace Infrastructure.Data.Repositories
 {
 	public class LetterCountRepository : ILetterCountRepository
 	{

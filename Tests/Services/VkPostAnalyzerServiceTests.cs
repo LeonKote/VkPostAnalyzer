@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Interfaces.ApiClients;
+using Domain.Interfaces.Repositories;
 using Domain.Models;
 using Domain.Models.Vk;
 using Microsoft.Extensions.Logging;
@@ -6,7 +7,7 @@ using Moq;
 using Services;
 using Xunit;
 
-namespace Tests.Unit
+namespace Tests.Services
 {
 	public class VkPostAnalyzerServiceTests
 	{
