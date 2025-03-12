@@ -21,7 +21,6 @@ namespace Tests.Services
 			letterCountRepositoryMock = new Mock<ILetterCountRepository>();
 			vkApiClientMock = new Mock<IVkApiClient>();
 			loggerMock = new Mock<ILogger<VkPostAnalyzerService>>();
-
 			vkPostAnalyzerService = new VkPostAnalyzerService(letterCountRepositoryMock.Object, vkApiClientMock.Object, loggerMock.Object);
 		}
 

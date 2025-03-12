@@ -34,14 +34,17 @@ namespace Services
 			var letterCounts = text.ToLower()
 				.Where(char.IsLetter)
 				.GroupBy(c => c)
-				.OrderBy(g => GetAlphabeticalOrder(g.Key));
+				.Select(g => new LetterCount(g.Key, g.Count()))
+				.ToList();
 
-			var entities = letterCounts.Select(g => new LetterCount(g.Key, g.Count())).ToList();
 			logger.LogInformation("Анализ завершен, сохранение данных в БД...");
 
-			await letterCountRepository.ClearAndAddRangeAsync(entities);
+			// Записи автоматически сортируются по первичному ключу
+			await letterCountRepository.ClearAndAddRangeAsync(letterCounts);
 			logger.LogInformation("Данные успешно сохранены.");
 
+			// Ручная сортировка для корректного отображения результата вне бд
+			var entities = letterCounts.OrderBy(g => GetAlphabeticalOrder(g.Letter)).ToList();
 			return Result<List<LetterCount>>.Success(entities);
 		}
 
