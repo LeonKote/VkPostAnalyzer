@@ -7,12 +7,12 @@ using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Log.Logger = new LoggerConfiguration()
-	.WriteTo.Console()
-	.WriteTo.File("logs/app.log", rollingInterval: RollingInterval.Day)
-	.CreateLogger();
-
-builder.Host.UseSerilog();
+builder.Host.UseSerilog((context, services, configuration) =>
+{
+	configuration
+		.ReadFrom.Configuration(context.Configuration)
+		.ReadFrom.Services(services);
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
