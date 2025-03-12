@@ -12,9 +12,9 @@ namespace Services
 	{
 		private readonly IAuthRequestRepository authRequestRepository;
 		private readonly IVkApiClient vkApiClient;
-		private readonly ILogger<VkPostAnalyzerService> logger;
+		private readonly ILogger<VkAuthService> logger;
 
-		public VkAuthService(IAuthRequestRepository authRequestRepository, IVkApiClient vkApiClient, ILogger<VkPostAnalyzerService> logger)
+		public VkAuthService(IAuthRequestRepository authRequestRepository, IVkApiClient vkApiClient, ILogger<VkAuthService> logger)
 		{
 			this.authRequestRepository = authRequestRepository;
 			this.vkApiClient = vkApiClient;

@@ -15,7 +15,10 @@ namespace Infrastructure.Data
 
 		public async Task ClearAndAddRangeAsync(IEnumerable<LetterCount> letterCounts)
 		{
-			await dbContext.LetterCounts.ExecuteDeleteAsync();
+			// Провайдер базы данных для тестов не поддерживает этот метод
+			// await dbContext.LetterCounts.ExecuteDeleteAsync();
+			var allEntries = await dbContext.LetterCounts.ToListAsync();
+			dbContext.LetterCounts.RemoveRange(allEntries);
 			await dbContext.LetterCounts.AddRangeAsync(letterCounts);
 			await dbContext.SaveChangesAsync();
 		}

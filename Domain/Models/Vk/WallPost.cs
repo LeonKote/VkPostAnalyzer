@@ -2,7 +2,7 @@
 
 namespace Domain.Models.Vk
 {
-	public class Post
+	public class WallPost
 	{
 		[JsonPropertyName("text")]
 		public string? Text { get; set; }
