@@ -22,11 +22,10 @@ builder.Services.AddSwaggerGen(options =>
 	var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 	options.IncludeXmlComments(xmlPath);
 });
-builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IVkApiClient, VkApiClient>();
 builder.Services.AddDbContext<AppDbContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("VkPostAnalyzerDb")));
 
-builder.Services.AddScoped<IVkApiClient, VkApiClient>();
 builder.Services.AddScoped<IVkAuthService, VkAuthService>();
 builder.Services.AddScoped<IVkPostAnalyzerService, VkPostAnalyzerService>();
 builder.Services.AddScoped<IAuthRequestRepository, AuthRequestRepository>();
