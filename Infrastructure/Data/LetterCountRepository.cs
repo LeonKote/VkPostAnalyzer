@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
@@ -12,8 +13,9 @@ namespace Infrastructure.Data
 			this.dbContext = dbContext;
 		}
 
-		public async Task AddRangeAsync(IEnumerable<LetterCount> letterCounts)
+		public async Task ClearAndAddRangeAsync(IEnumerable<LetterCount> letterCounts)
 		{
+			await dbContext.LetterCounts.ExecuteDeleteAsync();
 			await dbContext.LetterCounts.AddRangeAsync(letterCounts);
 			await dbContext.SaveChangesAsync();
 		}

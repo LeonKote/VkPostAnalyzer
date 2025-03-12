@@ -37,7 +37,7 @@ namespace Services
 			var entities = letterCounts.Select(g => new LetterCount(g.Key, g.Count())).ToList();
 			logger.LogInformation("Анализ завершен, сохранение данных в БД...");
 
-			await letterCountRepository.AddRangeAsync(entities);
+			await letterCountRepository.ClearAndAddRangeAsync(entities);
 			logger.LogInformation("Данные успешно сохранены.");
 
 			return Result<List<LetterCount>>.Success(entities);

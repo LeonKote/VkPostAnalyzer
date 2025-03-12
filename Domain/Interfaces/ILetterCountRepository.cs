@@ -4,6 +4,6 @@ namespace Domain.Interfaces
 {
 	public interface ILetterCountRepository
 	{
-		Task AddRangeAsync(IEnumerable<LetterCount> letterCounts);
+		Task ClearAndAddRangeAsync(IEnumerable<LetterCount> letterCounts);
 	}
 }
