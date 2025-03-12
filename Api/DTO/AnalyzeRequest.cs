@@ -1,4 +1,4 @@
-﻿namespace VkPostAnalyzer.Domain.DTO
+﻿namespace Api.DTO
 {
 	public class AnalyzeRequest
 	{

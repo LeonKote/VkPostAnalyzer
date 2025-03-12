@@ -1,6 +1,6 @@
-﻿using VkPostAnalyzer.Domain.Models.Vk;
+﻿using Domain.Models.Vk;
 
-namespace VkPostAnalyzer.Domain.Interfaces
+namespace Domain.Interfaces
 {
 	public interface IVkApiClient
 	{

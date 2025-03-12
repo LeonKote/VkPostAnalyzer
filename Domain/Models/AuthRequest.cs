@@ -1,4 +1,4 @@
-﻿namespace VkPostAnalyzer.Domain.Models
+﻿namespace Domain.Models
 {
 	public class AuthRequest
 	{

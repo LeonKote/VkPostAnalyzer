@@ -1,9 +1,9 @@
+using Domain.Interfaces;
+using Infrastructure.ApiClients;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using VkPostAnalyzer.Domain.Interfaces;
-using VkPostAnalyzer.Infrastructure.ApiClients;
-using VkPostAnalyzer.Infrastructure.Data;
-using VkPostAnalyzer.Services;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +29,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IVkApiClient, VkApiClient>();
 builder.Services.AddScoped<IVkAuthService, VkAuthService>();
 builder.Services.AddScoped<IVkPostAnalyzerService, VkPostAnalyzerService>();
+builder.Services.AddScoped<IAuthRequestRepository, AuthRequestRepository>();
+builder.Services.AddScoped<ILetterCountRepository, LetterCountRepository>();
 
 var app = builder.Build();
 

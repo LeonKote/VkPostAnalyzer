@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using VkPostAnalyzer.Domain.DTO;
-using VkPostAnalyzer.Domain.Interfaces;
+﻿using Api.DTO;
+using Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
-namespace VkPostAnalyzer.Controllers
+namespace Api.Controllers
 {
 	[ApiController]
 	[Route("api/vk/posts")]

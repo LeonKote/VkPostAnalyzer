@@ -1,9 +1,10 @@
-﻿using System.Text;
+﻿using Domain.Interfaces;
+using Domain.Models.Vk;
+using Microsoft.Extensions.Configuration;
+using System.Text;
 using System.Text.Json;
-using VkPostAnalyzer.Domain.Interfaces;
-using VkPostAnalyzer.Domain.Models.Vk;
 
-namespace VkPostAnalyzer.Infrastructure.ApiClients
+namespace Infrastructure.ApiClients
 {
 	public class VkApiClient : IVkApiClient
 	{

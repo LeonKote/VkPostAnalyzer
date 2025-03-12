@@ -1,23 +1,22 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.EntityFrameworkCore;
+﻿using Domain.Errors;
+using Domain.Interfaces;
+using Domain.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
 using System.Text;
-using VkPostAnalyzer.Domain.Errors;
-using VkPostAnalyzer.Domain.Interfaces;
-using VkPostAnalyzer.Domain.Models;
-using VkPostAnalyzer.Infrastructure.Data;
 
-namespace VkPostAnalyzer.Services
+namespace Services
 {
 	public class VkAuthService : IVkAuthService
 	{
-		private readonly AppDbContext dbContext;
+		private readonly IAuthRequestRepository authRequestRepository;
 		private readonly IVkApiClient vkApiClient;
 		private readonly ILogger<VkPostAnalyzerService> logger;
 
-		public VkAuthService(AppDbContext dbContext, IVkApiClient vkApiClient, ILogger<VkPostAnalyzerService> logger)
+		public VkAuthService(IAuthRequestRepository authRequestRepository, IVkApiClient vkApiClient, ILogger<VkPostAnalyzerService> logger)
 		{
-			this.dbContext = dbContext;
+			this.authRequestRepository = authRequestRepository;
 			this.vkApiClient = vkApiClient;
 			this.logger = logger;
 		}
@@ -32,8 +31,7 @@ namespace VkPostAnalyzer.Services
 			var authUrl = vkApiClient.GetAuthUrl(state, codeChallenge);
 
 			var authRequest = new AuthRequest(state, codeVerifier, DateTime.UtcNow);
-			await dbContext.AuthRequests.AddAsync(authRequest);
-			await dbContext.SaveChangesAsync();
+			await authRequestRepository.AddAsync(authRequest);
 
 			return Result<string>.Success(authUrl);
 		}
@@ -42,12 +40,11 @@ namespace VkPostAnalyzer.Services
 		{
 			logger.LogInformation("Обработка ответа VK");
 
-			var authRequest = await dbContext.AuthRequests.FirstOrDefaultAsync(x => x.State == state);
+			var authRequest = await authRequestRepository.GetByStateAsync(state);
 			if (authRequest == null)
 				return Result<string>.Failure("Invalid state parameter.");
 
-			dbContext.AuthRequests.Remove(authRequest);
-			await dbContext.SaveChangesAsync();
+			await authRequestRepository.RemoveAsync(authRequest);
 
 			var accessToken = await vkApiClient.GetAccessToken(code, deviceId, authRequest.CodeVerifier);
 			if (accessToken == null)

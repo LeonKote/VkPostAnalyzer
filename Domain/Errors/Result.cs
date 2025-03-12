@@ -1,4 +1,4 @@
-﻿namespace VkPostAnalyzer.Domain.Errors
+﻿namespace Domain.Errors
 {
 	public class Result<T>
 	{

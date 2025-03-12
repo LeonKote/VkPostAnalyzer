@@ -1,8 +1,7 @@
-﻿namespace VkPostAnalyzer.Domain.Models
+﻿namespace Domain.Models
 {
 	public class LetterCount
 	{
-		public long Id { get; set; }
 		public char Letter { get; set; }
 		public int Count { get; set; }
 

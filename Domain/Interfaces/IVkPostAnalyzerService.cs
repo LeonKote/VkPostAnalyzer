@@ -1,7 +1,7 @@
-﻿using VkPostAnalyzer.Domain.Errors;
-using VkPostAnalyzer.Domain.Models;
+﻿using Domain.Errors;
+using Domain.Models;
 
-namespace VkPostAnalyzer.Domain.Interfaces
+namespace Domain.Interfaces
 {
 	public interface IVkPostAnalyzerService
 	{

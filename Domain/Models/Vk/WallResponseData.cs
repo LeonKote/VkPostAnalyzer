@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace VkPostAnalyzer.Domain.Models.Vk
+namespace Domain.Models.Vk
 {
 	public class WallResponseData
 	{

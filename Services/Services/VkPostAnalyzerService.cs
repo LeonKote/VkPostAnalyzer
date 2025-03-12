@@ -1,19 +1,19 @@
-﻿using VkPostAnalyzer.Domain.Errors;
-using VkPostAnalyzer.Domain.Interfaces;
-using VkPostAnalyzer.Domain.Models;
-using VkPostAnalyzer.Infrastructure.Data;
+﻿using Domain.Errors;
+using Domain.Interfaces;
+using Domain.Models;
+using Microsoft.Extensions.Logging;
 
-namespace VkPostAnalyzer.Services
+namespace Services
 {
 	public class VkPostAnalyzerService : IVkPostAnalyzerService
 	{
-		private readonly AppDbContext dbContext;
+		private readonly ILetterCountRepository letterCountRepository;
 		private readonly IVkApiClient vkApiClient;
 		private readonly ILogger<VkPostAnalyzerService> logger;
 
-		public VkPostAnalyzerService(AppDbContext dbContext, IVkApiClient vkApiClient, ILogger<VkPostAnalyzerService> logger)
+		public VkPostAnalyzerService(ILetterCountRepository letterCountRepository, IVkApiClient vkApiClient, ILogger<VkPostAnalyzerService> logger)
 		{
-			this.dbContext = dbContext;
+			this.letterCountRepository = letterCountRepository;
 			this.vkApiClient = vkApiClient;
 			this.logger = logger;
 		}
@@ -37,8 +37,7 @@ namespace VkPostAnalyzer.Services
 			var entities = letterCounts.Select(g => new LetterCount(g.Key, g.Count())).ToList();
 			logger.LogInformation("Анализ завершен, сохранение данных в БД...");
 
-			await dbContext.LetterCounts.AddRangeAsync(entities);
-			await dbContext.SaveChangesAsync();
+			await letterCountRepository.AddRangeAsync(entities);
 			logger.LogInformation("Данные успешно сохранены.");
 
 			return Result<List<LetterCount>>.Success(entities);

@@ -1,6 +1,6 @@
-﻿using VkPostAnalyzer.Domain.Errors;
+﻿using Domain.Errors;
 
-namespace VkPostAnalyzer.Domain.Interfaces
+namespace Domain.Interfaces
 {
 	public interface IVkAuthService
 	{

@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using VkPostAnalyzer.Domain.Models;
+﻿using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace VkPostAnalyzer.Infrastructure.Data
+namespace Infrastructure.Data
 {
 	public class AppDbContext : DbContext
 	{
